@@ -15,8 +15,24 @@ Project.prototype.toHtml = function () {
   return $project;
 };
 
-$(document).ready(function () {
-  projects.forEach(function (p) {
-    $('.projects').append((new Project(p)).toHtml());
+(function () {
+  function setTabListener () {
+    $('nav').on('click', 'a', function () {
+      $('body > section').hide();
+      $('#' + $(this).data('content')).show();
+    });
+    $('nav a').first().click();
+  }
+
+  function loadProjects() {
+    projects.forEach(function (p) {
+      $('#projects').append((new Project(p)).toHtml());
+    });
+  }
+
+  $(document).ready(function () {
+    loadProjects();
+    setTabListener();
   });
-});
+})();
+
