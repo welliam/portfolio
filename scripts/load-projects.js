@@ -1,8 +1,14 @@
+var types = [];
+
 function Project(o) {
   this.title = o.title;
-  this.type = o.type;
   this.link = o.link;
   this.description = o.description;
+
+  this.type = o.type;
+  if (types.indexOf(this.type) >= 0) {
+    types.push(this.type);
+  }
 }
 
 Project.prototype.toHtml = function () {
