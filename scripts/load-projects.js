@@ -41,4 +41,3 @@ Project.prototype.toHtml = function () {
     setTabListener();
   });
 })();
-
