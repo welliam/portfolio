@@ -1,5 +1,47 @@
 body {
-  margin: 1em;
+  margin: 3em;
+  max-width: 45em;
+  margin: 0 auto;
+  background-color: #FFE2D7;
+}
+
+a, a:visited {
+  color: #6175FF;
+  text-decoration: none;
+}
+
+.project-type {
+  padding-right: 0.4em;
+  margin-right: 0.4em;
+  border-right: thin solid #333333;
+}
+
+header {
+  text-align: center;
+}
+
+
+header, h1, h2, h3 {
+  color: #385226;
+}
+
+nav {
+  float: left;
+  margin-right: 1em;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  margin-bottom: 0.2em;
+  font-size: 1.3em;
+}
+
+body > section {
+  overflow: hidden;
 }
 
 article.project {
