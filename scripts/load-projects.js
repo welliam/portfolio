@@ -17,14 +17,23 @@ Project.prototype.toHtml = function () {
 };
 
 (function () {
+  function showContent(id, fadeIn) {
+    $('body > section').hide();
+    var content = $(id);
+    if (fadeIn) {
+      content.fadeIn();
+    } else {
+      content.show();
+    }
+  }
+
   function setTabListener () {
     $('nav').on('click', 'a', function () {
       if($(this).data('content')) {
-        $('body > section').hide();
-        $('#' + $(this).data('content')).show();
+        showContent('#' + $(this).data('content'), true);
       }
     });
-    $('nav a').first().click();
+    showContent($('#projects'), false);
   }
 
   function populateFilter() {
