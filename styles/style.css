@@ -11,12 +11,6 @@ a, a:visited {
   text-decoration: none;
 }
 
-.project-type {
-  padding-right: 0.4em;
-  margin-right: 0.4em;
-  border-right: thin solid #333333;
-}
-
 header {
   text-align: center;
 }
