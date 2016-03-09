@@ -6,6 +6,7 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="vendor/styles/normalize.css" />
   <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/fonts.css" />
 </head>
 
 <body>
@@ -15,9 +16,13 @@
 
   <nav>
     <ul>
-      <li><a href="#" data-content="projects">Projects</a></li>
-      <li><a href="#" data-content="about">About</a></li>
-      <li><a href="https://github.com/welliam">Github</a></li>
+      <li>
+        <a href="#" class="icon-projects" data-content="projects">Projects</a>
+      </li><li>
+        <a href="#" class="icon-user" data-content="about">About</a>
+      </li><li>
+        <a href="https://github.com/welliam" class="icon-github">Github</a>
+      </li>
     </ul>
   </nav>
 
@@ -26,7 +31,7 @@
     <article class="template project">
       <h3 class="project-title">Project Title</h3>
       <section class="project-info">
-        <span class="project-type">Project type</span><a class="project-link">link</a>
+        <span class="project-type">Project type</span><a class="icon-link project-link"></a>
       </section>
       <section class="project-description">Project description</section>
     </article>
