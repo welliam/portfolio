@@ -3,6 +3,7 @@ body {
   max-width: 45em;
   margin: 0 auto;
   background-color: #FFE2D7;
+  font-family: 'arial' 'sans serif';
 }
 
 a, a:visited {
