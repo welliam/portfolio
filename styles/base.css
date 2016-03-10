@@ -1,0 +1,16 @@
+body {
+  margin: 3em;
+  max-width: 55em;
+  margin: 0 auto;
+  background-color: #FFE2D7;
+  font-family: 'arial' 'sans serif';
+}
+
+a, a:visited {
+  color: #6175FF;
+  text-decoration: none;
+}
+
+header, h1, h2, h3 {
+  color: #385226;
+}

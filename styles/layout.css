@@ -1,0 +1,12 @@
+body > section {
+  overflow: hidden;
+}
+
+header {
+  text-align: center;
+}
+
+nav {
+  float: left;
+  margin-right: 1em;
+}
