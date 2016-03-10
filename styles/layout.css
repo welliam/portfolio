@@ -15,11 +15,14 @@ img {
   max-width: 75%;
 }
 
+article.project {
+  margin-bottom: 2.5em;
+}
+
 @media only screen and (min-width: 640px) {
   nav {
     float: left;
     margin-right: 1em;
     text-align: left;
   }
-
 }

@@ -8,10 +8,6 @@ nav li {
   font-size: 1.3em;
 }
 
-article.project {
-  margin: 1em;
-}
-
 article.template {
   display: none;
 }
