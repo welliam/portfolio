@@ -14,3 +14,7 @@ a, a:visited {
 header, h1, h2, h3 {
   color: #385226;
 }
+
+select {
+  background: none;
+}
