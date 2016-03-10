@@ -11,10 +11,15 @@ nav {
   text-align: center;
 }
 
+img {
+  max-width: 75%;
+}
+
 @media only screen and (min-width: 640px) {
   nav {
     float: left;
     margin-right: 1em;
     text-align: left;
   }
+
 }

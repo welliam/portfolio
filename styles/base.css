@@ -18,3 +18,8 @@ header, h1, h2, h3 {
 select {
   background: none;
 }
+
+img {
+  margin: 1em;
+  border: solid thin;
+}
