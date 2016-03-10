@@ -6,14 +6,13 @@ function Project(o) {
 }
 
 Project.prototype.toHtml = function () {
-  var $project = $('article.template').clone();
-  $project.find('.project-title').text(this.title);
-  $project.find('.project-type').text(this.type);
-  $project.find('.project-description').text(this.description);
-  $project.find('.project-link').attr('href', this.link);
-  $project.removeClass('template');
-  $project.data('type', this.type);
-  return $project;
+  var template = Handlebars.compile($('#article-template').html());
+  return template({
+    title: this.title,
+    link: this.link,
+    description: this.description,
+    type: this.type
+  });
 };
 
 (function () {
