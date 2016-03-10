@@ -1,0 +1,15 @@
+body {
+  margin: 1em;
+}
+
+article.project {
+  margin: 1em;
+}
+
+article.template {
+  display: none;
+}
+
+.project-title {
+  font-size: 1.5em;
+}
