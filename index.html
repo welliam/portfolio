@@ -10,12 +10,21 @@
   <link rel="stylesheet" href="styles/layout.css" />
   <link rel="stylesheet" href="styles/module.css" />
   <link rel="stylesheet" href="styles/fonts.css" />
+
+  <script id="article-template" type="text/x-handlebars-template">
+    <article class="project">
+      <h3 class="project-title">{{ title }}</h3>
+      <section class="project-info">
+	      <span class="project-type">{{ type }}</span>
+	      <a class="icon-link project-link" href="{{ link }}"></a>
+      </section>
+      <section class="project-description">{{ description }}</section>
+    </article>
+  </script>
 </head>
 
 <body>
-  <header>
-    <h1>Portfolio</h1>
-  </header>
+  <header><h1>Portfolio</h1></header>
 
   <nav>
     <ul>
@@ -36,17 +45,7 @@
   </nav>
 
   <section id="projects">
-    <h2>My Projects</h2>
-    <article class="template project">
-      <h3 class="project-title">
-        Project Title
-      </h3>
-      <section class="project-info">
-        <span class="project-type">Project type</span>
-        <a class="icon-link project-link"></a>
-      </section>
-      <section class="project-description">Project description</section>
-    </article>
+    <header><h2>My Projects</h2></header>
   </section>
 
   <section id="about">
@@ -56,16 +55,15 @@
       Scheme. Since then I've learned a variety of functional languages,
       including other Lisps such as Common Lisp and Clojure, and statically
       typed languages like Haskell.
-    </p><p>
+    <p>
       In my free time I enjoy playing jazz. In addition to playing piano and
       drums, I like studying music theory.
-    </p><p>
+    <p>
       Here's a picture of some bread I made:
       <img src="bread.jpg"></img>
-    </p>
-
   </section>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
   <script src="vendor/scripts/jquery.js"></script>
   <script src="scripts/projects-data.js"></script>
   <script src="scripts/load-projects.js"></script>
