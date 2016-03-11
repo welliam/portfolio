@@ -51,7 +51,7 @@ Project.prototype.toHtml = function () {
     $('article').hide();
     var articles = $('article').not('article.template');
     if (type) {
-      $('article').not('article.template').each(function () {
+      $('article').each(function () {
         if (type == $(this).data('type')) {
           $(this).fadeIn();
         }
