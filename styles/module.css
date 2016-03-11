@@ -11,3 +11,7 @@ nav li {
 .project-title {
   font-size: 1.5em;
 }
+
+#newProjectForm input {
+    display: block;
+}
