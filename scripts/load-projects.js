@@ -68,21 +68,40 @@ Project.prototype.toHtml = function () {
   }
 
   function loadProjects(projects) {
-    console.log(projects);
     projects.forEach(function (p) {
       $('#projects').append((new Project(p)).toHtml());
     });
     populateFilter();
   }
 
-  function getProjectsJSON(callback) {
+  function getProjectsJSON(handleJSON) {
     $.getJSON('/data/projects-data.json', function(data) {
-      callback(data);
+      handleJSON(data);
+    });
+  }
+
+  function finishProjectsJSONRequest(handleJSON, newETag) {
+    if (newETag == localStorage.projectsETag) {
+      handleJSON(JSON.parse(localStorage.projectsData));
+    } else {
+      localStorage.projectsETag = newETag;
+      getProjectsJSON(function (data) {
+        localStorage.projectsData = JSON.stringify(data);
+        handleJSON(data);
+      });
+    }
+  }
+
+  function getProjectsCached(handleJSON) {
+    $.ajax('/data/projects-data.json', {
+      method: 'HEAD',
+    }).done(function (data, status, request) {
+      finishProjectsJSONRequest(handleJSON, request.getResponseHeader('eTag'));
     });
   }
 
   $(document).ready(function () {
-    getProjectsJSON(loadProjects);
+    getProjectsCached(loadProjects);
     setFilterListener();
     setTabListener();
   });
