@@ -67,15 +67,22 @@ Project.prototype.toHtml = function () {
     });
   }
 
-  function loadProjects() {
+  function loadProjects(projects) {
+    console.log(projects);
     projects.forEach(function (p) {
       $('#projects').append((new Project(p)).toHtml());
+    });
+    populateFilter();
+  }
+
+  function getProjectsJSON(callback) {
+    $.getJSON('/data/projects-data.json', function(data) {
+      callback(data);
     });
   }
 
   $(document).ready(function () {
-    loadProjects();
-    populateFilter();
+    getProjectsJSON(loadProjects);
     setFilterListener();
     setTabListener();
   });
