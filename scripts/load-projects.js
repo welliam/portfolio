@@ -69,17 +69,25 @@
     showContent('#projects', false);
   }
 
+  function removeDuplicates(array) {
+    return array.reduce(function (res, x) {
+      if (res.indexOf(x) == -1) {
+        res.push(x);
+      }
+      return res;
+    }, []);
+  }
+
   function populateFilter() {
     var found = [];
-    $('article').not('article.template').each(function () {
-      var val = $(this).data('type');
-      if (found.indexOf(val) == -1) {
-        optionTag = '<option value="' + val + '">' + val + '</option>';
-        $('#type-filter').append(optionTag);
-        found.push(val);
-      }
+    $('article').each(function () {
+      found.push($(this).data('type'));
     });
-  };
+    removeDuplicates(found).forEach(function (tag) {
+      optionTag = '<option value="' + tag + '">' + tag + '</option>';
+      $('#type-filter').append(optionTag);
+    });
+  }
 
   function filterProjects(type) {
     $('article').hide();
