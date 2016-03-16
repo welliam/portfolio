@@ -1,19 +1,53 @@
-function Project(o) {
-  this.title = o.title;
-  this.link = o.link;
-  this.description = o.description;
-  this.type = o.type;
-}
+(function (module) {
+  function Project(o) {
+    this.title = o.title;
+    this.link = o.link;
+    this.description = o.description;
+    this.type = o.type;
+  }
 
-Project.prototype.toHtml = function () {
-  var template = Handlebars.compile($('#article-template').html());
-  return template({
-    title: this.title,
-    link: this.link,
-    description: this.description,
-    type: this.type
-  });
-};
+  Project.prototype.toHtml = function () {
+    var template = Handlebars.compile($('#article-template').html());
+    return template({
+      title: this.title,
+      link: this.link,
+      description: this.description,
+      type: this.type
+    });
+  };
+
+  module.Project = Project;
+})(window);
+
+(function (module) {
+  function getProjectsJSON(handleJSON) {
+    $.getJSON('/data/projects-data.json', function(data) {
+      handleJSON(data);
+    });
+  }
+
+  function finishProjectsJSONRequest(handleJSON, newETag) {
+    if (newETag == localStorage.projectsETag) {
+      handleJSON(JSON.parse(localStorage.projectsData));
+    } else {
+      localStorage.projectsETag = newETag;
+      getProjectsJSON(function (data) {
+        localStorage.projectsData = JSON.stringify(data);
+        handleJSON(data);
+      });
+    }
+  }
+
+  function getProjectsCached(handleJSON) {
+    $.ajax('/data/projects-data.json', {
+      method: 'HEAD',
+    }).done(function (data, status, request) {
+      finishProjectsJSONRequest(handleJSON, request.getResponseHeader('eTag'));
+    });
+  }
+
+  module.getProjects = getProjectsCached;
+})(window);
 
 (function () {
   function showContent(id, fadeIn) {
@@ -32,13 +66,13 @@ Project.prototype.toHtml = function () {
         showContent('#' + $(this).data('content'), true);
       }
     });
-    showContent($('#projects'), false);
+    showContent('#projects', false);
   }
 
   function populateFilter() {
     var found = [];
     $('article').not('article.template').each(function () {
-      val = $(this).data('type');
+      var val = $(this).data('type');
       if (found.indexOf(val) == -1) {
         optionTag = '<option value="' + val + '">' + val + '</option>';
         $('#type-filter').append(optionTag);
@@ -74,34 +108,8 @@ Project.prototype.toHtml = function () {
     populateFilter();
   }
 
-  function getProjectsJSON(handleJSON) {
-    $.getJSON('/data/projects-data.json', function(data) {
-      handleJSON(data);
-    });
-  }
-
-  function finishProjectsJSONRequest(handleJSON, newETag) {
-    if (newETag == localStorage.projectsETag) {
-      handleJSON(JSON.parse(localStorage.projectsData));
-    } else {
-      localStorage.projectsETag = newETag;
-      getProjectsJSON(function (data) {
-        localStorage.projectsData = JSON.stringify(data);
-        handleJSON(data);
-      });
-    }
-  }
-
-  function getProjectsCached(handleJSON) {
-    $.ajax('/data/projects-data.json', {
-      method: 'HEAD',
-    }).done(function (data, status, request) {
-      finishProjectsJSONRequest(handleJSON, request.getResponseHeader('eTag'));
-    });
-  }
-
   $(document).ready(function () {
-    getProjectsCached(loadProjects);
+    getProjects(loadProjects);
     setFilterListener();
     setTabListener();
   });
