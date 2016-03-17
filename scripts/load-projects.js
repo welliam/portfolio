@@ -49,26 +49,7 @@
   module.getProjects = getProjectsCached;
 })(window);
 
-(function () {
-  function showContent(id, fadeIn) {
-    $('body > section').hide();
-    var content = $(id);
-    if (fadeIn) {
-      content.fadeIn();
-    } else {
-      content.show();
-    }
-  }
-
-  function setTabListener () {
-    $('nav').on('click', 'a', function () {
-      if($(this).data('content')) {
-        showContent('#' + $(this).data('content'), true);
-      }
-    });
-    showContent('#projects', false);
-  }
-
+(function (module) {
   function removeDuplicates(array) {
     return array.reduce(function (res, x) {
       if (res.indexOf(x) == -1) {
@@ -87,6 +68,7 @@
       optionTag = '<option value="' + tag + '">' + tag + '</option>';
       $('#type-filter').append(optionTag);
     });
+    setFilterListener();
   }
 
   function filterProjects(type) {
@@ -109,16 +91,38 @@
     });
   }
 
+  module.populateFilter = populateFilter;
+})(window);
+
+(function () {
+  function showContent(id, fadeIn) {
+    $('body > section').hide();
+    var content = $(id);
+    if (fadeIn) {
+      content.fadeIn();
+    } else {
+      content.show();
+    }
+  }
+
+  function setTabListener () {
+    $('nav').on('click', 'a', function () {
+      if($(this).data('content')) {
+        showContent('#' + $(this).data('content'), true);
+      }
+    });
+    showContent('#projects', false);
+  }
+
   function loadProjects(projects) {
     projects.forEach(function (p) {
       $('#projects').append((new Project(p)).toHtml());
     });
-    populateFilter();
   }
 
   $(document).ready(function () {
     getProjects(loadProjects);
-    setFilterListener();
+    populateFilter();
     setTabListener();
   });
 })();
