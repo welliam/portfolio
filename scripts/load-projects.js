@@ -121,8 +121,10 @@
   }
 
   $(document).ready(function () {
-    getProjects(loadProjects);
-    populateFilter();
+    getProjects(function (data) {
+      loadProjects(data);
+      populateFilter();
+    });
     setTabListener();
   });
 })();
