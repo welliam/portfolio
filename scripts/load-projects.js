@@ -91,8 +91,9 @@
 
   function setTabListener () {
     $('nav').on('click', 'a', function () {
-      if($(this).data('content')) {
-        showContent('#' + $(this).data('content'), true);
+      var content = $(this).data('content');
+      if(content) {
+        showContent('#' + content, true);
       }
     });
     showContent('#projects', false);
