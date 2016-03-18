@@ -50,23 +50,15 @@
 })(window);
 
 (function (module) {
-  function removeDuplicates(array) {
-    return array.reduce(function (res, x) {
-      if (res.indexOf(x) == -1) {
-        res.push(x);
-      }
-      return res;
-    }, []);
-  }
-
   function populateFilter() {
     var found = [];
     $('article').each(function () {
-      found.push($(this).data('type'));
-    });
-    removeDuplicates(found).forEach(function (tag) {
-      optionTag = '<option value="' + tag + '">' + tag + '</option>';
-      $('#type-filter').append(optionTag);
+      var tag = $(this).data('type');
+      if (found.indexOf(tag) == -1) {
+        found.push(tag);
+        var optionTag = '<option value="' + tag + '">' + tag + '</option>';
+        $('#type-filter').append(optionTag);
+      }
     });
     setFilterListener();
   }
