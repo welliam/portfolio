@@ -15,9 +15,7 @@
 
 (function (module) {
   function getProjectsJSON(handleJSON) {
-    $.getJSON('/data/projects-data.json', function(data) {
-      handleJSON(data);
-    });
+    $.getJSON('/data/projects-data.json', handleJSON);
   }
 
   function finishProjectsJSONRequest(handleJSON, newETag) {
