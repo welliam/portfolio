@@ -1,19 +1,13 @@
 (function (module) {
   function Project(o) {
-    this.title = o.title;
-    this.link = o.link;
-    this.description = o.description;
-    this.type = o.type;
+    for(k in o) {
+      this[k] = o[k]; // ok
+    }
   }
 
   Project.prototype.toHtml = function () {
     var template = Handlebars.compile($('#article-template').html());
-    return template({
-      title: this.title,
-      link: this.link,
-      description: this.description,
-      type: this.type
-    });
+    return template(this);
   };
 
   module.Project = Project;
