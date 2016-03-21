@@ -1,7 +1,7 @@
 (function (module) {
   function Project(o) {
     for(k in o) {
-      this[k] = o[k]; // ok
+      this[k] = o[k];
     }
   }
 
