@@ -51,7 +51,7 @@
   function setupRoutes() {
     page('/', function () { showContent('#projects') });
     page('/about', function () { showContent('#about') });
-    console.log('done');
+    page();
   }
 
   $(document).ready(function () {
