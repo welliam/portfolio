@@ -3,7 +3,7 @@
     var found = [];
     $('article').each(function () {
       var tag = $(this).data('type');
-      if (found.indexOf(tag) == -1) {
+      if (tag && found.indexOf(tag) == -1) {
         found.push(tag);
         var optionTag = '<option value="' + tag + '">' + tag + '</option>';
         $('#type-filter').append(optionTag);
