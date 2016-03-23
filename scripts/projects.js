@@ -16,7 +16,7 @@
 (function (module) {
   function getProjectsJSON(method, handleResponse) {
     $.ajax({
-      method: 'GET',
+      method: method,
       url: 'github',
       success: handleResponse
     });
