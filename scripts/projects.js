@@ -17,7 +17,7 @@
   function getProjectsJSON(method, handleResponse) {
     $.ajax({
       method: 'GET',
-      url: 'github/users/welliam/repos?per_page=5&sort=updated',
+      url: 'github',
       success: handleResponse
     });
   }
