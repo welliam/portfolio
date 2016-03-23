@@ -17,10 +17,7 @@
   function getProjectsJSON(method, handleResponse) {
     $.ajax({
       method: method,
-      url: 'https://api.github.com/users/welliam/repos?per_page=5&sort=updated',
-      headers: {
-        'Authorization': 'token ' + githubToken
-      },
+      url: 'github',
       success: handleResponse
     });
   }
