@@ -5,7 +5,7 @@ var express = require('express'),
 
 function proxyGitHub(request, response) {
   requestProxy({
-    url: 'https://api.github.com/' + request.params[0],
+    url: 'https://api.github.com/users/welliam/repos',
     headers: {
       Authorization: 'token ' + process.env.GITHUB_TOKEN
     }
@@ -13,6 +13,7 @@ function proxyGitHub(request, response) {
 }
 
 app.get('github/*', proxyGitHub);
+app.head('github', proxyGitHub);
 
 app.use(express.static('./'));
 

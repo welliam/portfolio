@@ -16,11 +16,8 @@
 (function (module) {
   function getProjectsJSON(method, handleResponse) {
     $.ajax({
-      method: method,
-      url: 'https://api.github.com/users/welliam/repos?per_page=5&sort=updated',
-      headers: {
-        'Authorization': 'token ' + githubToken
-      },
+      method: 'GET',
+      url: 'github/users/welliam/repos?per_page=5&sort=updated',
       success: handleResponse
     });
   }
