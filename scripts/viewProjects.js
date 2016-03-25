@@ -33,6 +33,7 @@
   }
 
   module.populateFilter = populateFilter;
+  module.filterProjects = filterProjects;
 })(window);
 
 (function () {
@@ -48,9 +49,22 @@
     });
   }
 
+  function showProjects(context, next) {
+    showContent('#projects');
+    if (next) {
+      next();
+    }
+  }
+
   function setupRoutes() {
-    page('/', function () { showContent('#projects') });
+    page('/', showProjects);
     page('/about', function () { showContent('#about') });
+    page('/type/:type', function(context, next) {
+      context.filter = context.params.type;
+      next();
+    }, showProjects, function (context) {
+      filterProjects(context.filter);
+    });
     page();
   }
 

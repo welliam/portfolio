@@ -15,10 +15,18 @@ function proxyGitHub(request, response) {
 app.get('/github', proxyGitHub);
 app.head('/github', proxyGitHub);
 
+function sendIndex (response) {
+  response.sendFile('index.html', { root: '.' });
+}
+
 app.use(express.static('./'));
 
 app.get('/', function (request, response) {
-  response.sendFile('index.html', { root: '.' });
+  sendIndex(response);
+});
+
+app.get('/type/*', function (request, response) {
+  sendIndex(response);
 });
 
 app.listen(port);
