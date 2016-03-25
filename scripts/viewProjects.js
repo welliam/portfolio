@@ -14,7 +14,7 @@
 
   function filterProjects(type) {
     $('article').hide();
-    var articles = $('article').not('article.template');
+    var articles = $('article');
     if (type) {
       $('article').each(function () {
         if (type == $(this).data('type')) {
@@ -57,9 +57,9 @@
   }
 
   function setupRoutes() {
-    page('/', showProjects);
+    page('/', retrieve, showProjects);
     page('/about', function () { showContent('#about') });
-    page('/type/:type', function(context, next) {
+    page('/type/:type', retrieve, function(context, next) {
       context.filter = context.params.type;
       next();
     }, showProjects, function (context) {
@@ -68,11 +68,20 @@
     page();
   }
 
+
+  function retrieve(context, next) {
+    if ($('article').length > 0) {
+      getProjects(function (data) {
+        loadProjects(data);
+        populateFilter();
+        next();
+      });
+    } else {
+      next();
+    }
+  }
+
   $(document).ready(function () {
     setupRoutes();
-    getProjects(function (data) {
-      loadProjects(data);
-      populateFilter();
-    });
   });
 })();
