@@ -14,8 +14,15 @@
 })(window);
 
 (function (module) {
-  function getProjectsJSON(handleJSON) {
-    $.getJSON('/data/projects-data.json', handleJSON);
+  function getProjectsJSON(method, handleResponse) {
+    $.ajax({
+      method: method,
+      url: 'https://api.github.com/users/welliam/repos?per_page=5&sort=updated',
+      headers: {
+        'Authorization': 'token ' + githubToken
+      },
+      success: handleResponse
+    });
   }
 
   function finishProjectsJSONRequest(handleJSON, newETag) {
@@ -23,7 +30,7 @@
       handleJSON(JSON.parse(localStorage.projectsData));
     } else {
       localStorage.projectsETag = newETag;
-      getProjectsJSON(function (data) {
+      getProjectsJSON('GET', function (data) {
         localStorage.projectsData = JSON.stringify(data);
         handleJSON(data);
       });
@@ -31,9 +38,7 @@
   }
 
   function getProjectsCached(handleJSON) {
-    $.ajax('/data/projects-data.json', {
-      method: 'HEAD',
-    }).done(function (data, status, request) {
+    getProjectsJSON('HEAD', function (data, status, request) {
       finishProjectsJSONRequest(handleJSON, request.getResponseHeader('eTag'));
     });
   }
