@@ -13,10 +13,10 @@
 
   <script id="article-template" type="text/x-handlebars-template">
     <article class="project" data-type="{{ type }}">
-      <h3 class="project-title">{{ title }}</h3>
+      <h3 class="project-title">{{ name }}</h3>
       <section class="project-info">
-        <span class="project-type">{{ type }}</span>
-        <a class="icon-link project-link" href="{{ link }}"></a>
+        <span class="project-type">{{ language }}</span>
+        <a class="icon-link project-link" href="{{ url }}"></a>
       </section>
       <section class="project-description">{{ description }}</section>
     </article>
@@ -28,8 +28,8 @@
 
   <nav>
     <ul>
-      <li><a href="#" class="icon-embed" data-content="projects"> Projects</a></li>
-      <li><a href="#" class="icon-user" data-content="about"> About</a></li>
+      <li><a href="/" class="icon-embed" data-content="projects"> Projects</a></li>
+      <li><a href="/about" class="icon-user" data-content="about"> About</a></li>
       <li><a href="https://github.com/welliam" target="_blank" class="icon-github"> Github</a></li>
       <li><a href="mailto:well1912@gmail.com/" class="icon-envelope"> Email</a></li>
 
@@ -58,8 +58,12 @@
       <img src="bread.jpg"></img>
   </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
+  <script src="vendor/scripts"></script>
   <script src="vendor/scripts/jquery.js"></script>
+  <script src="vendor/scripts/page.js"></script>
+
+  <script src="scripts/githubToken.js"></script>
+
   <script src="scripts/projects.js"></script>
   <script src="scripts/viewProjects.js"></script>
 </body>

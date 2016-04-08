@@ -36,24 +36,10 @@
 })(window);
 
 (function () {
-  function showContent(id, fadeIn) {
+  function showContent(id) {
     $('body > section').hide();
     var content = $(id);
-    if (fadeIn) {
-      content.fadeIn();
-    } else {
-      content.show();
-    }
-  }
-
-  function setTabListener () {
-    $('nav').on('click', 'a', function () {
-      var content = $(this).data('content');
-      if(content) {
-        showContent('#' + content, true);
-      }
-    });
-    showContent('#projects', false);
+    content.fadeIn();
   }
 
   function loadProjects(projects) {
@@ -62,11 +48,17 @@
     });
   }
 
+  function setupRoutes() {
+    page('/', function () { showContent('#projects') });
+    page('/about', function () { showContent('#about') });
+    page();
+  }
+
   $(document).ready(function () {
+    setupRoutes();
     getProjects(function (data) {
       loadProjects(data);
       populateFilter();
     });
-    setTabListener();
   });
 })();
