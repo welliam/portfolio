@@ -14,7 +14,7 @@
 
   function filterProjects(type) {
     $('article').hide();
-    var articles = $('article').not('article.template');
+    var articles = $('article');
     if (type) {
       $('article').each(function () {
         if (type == $(this).data('type')) {
@@ -33,32 +33,5 @@
   }
 
   module.populateFilter = populateFilter;
+  module.filterProjects = filterProjects;
 })(window);
-
-(function () {
-  function showContent(id) {
-    $('body > section').hide();
-    var content = $(id);
-    content.fadeIn();
-  }
-
-  function loadProjects(projects) {
-    projects.forEach(function (p) {
-      $('#projects').append((new Project(p)).toHtml());
-    });
-  }
-
-  function setupRoutes() {
-    page('/', function () { showContent('#projects') });
-    page('/about', function () { showContent('#about') });
-    page();
-  }
-
-  $(document).ready(function () {
-    setupRoutes();
-    getProjects(function (data) {
-      loadProjects(data);
-      populateFilter();
-    });
-  });
-})();
