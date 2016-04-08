@@ -1,7 +1,7 @@
-page('/', retrieve, showProjects);
+page('/', controller.retrieve, controller.show);
 page('/about', controller.about)
-page('/type/:type', retrieve, function(context, next) {
+page('/type/:type', controller.retrieve, function(context, next) {
   context.filter = context.params.type;
   next();
-}, showProjects, controller.filter);
+}, controller.show, controller.filter);
 page();
