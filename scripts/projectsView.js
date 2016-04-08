@@ -56,19 +56,6 @@
     }
   }
 
-  function setupRoutes() {
-    page('/', retrieve, showProjects);
-    page('/about', function () { showContent('#about') });
-    page('/type/:type', retrieve, function(context, next) {
-      context.filter = context.params.type;
-      next();
-    }, showProjects, function (context) {
-      filterProjects(context.filter);
-    });
-    page();
-  }
-
-
   function retrieve(context, next) {
     if ($('article').length > 0) {
       getProjects(function (data) {
